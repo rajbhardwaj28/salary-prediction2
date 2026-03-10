@@ -14,16 +14,18 @@ job_title = st.selectbox("Select Your Job Title", encoder["Job Title"].classes_)
 experience = st.number_input("Enter Your Experience (in years)", 0.50)
 
 df = pd.DataFrame({
-    "Enter your age":[age],
-    "Select Your Gender":[gender],
-    "Select Your Education":[education],
-    "Select Your Job Title":[job_title],
-    "Enter Your Experience (in years)":[experience]
+    "Age":[age],
+    "Gender":[gender],
+    "Education Level":[education],
+    "Job Title":[job_title],
+    "Years of Experience":[experience]
 })
 
 if st.button("Predict Salary"):
-  for col in encoder:
-    df[col] = encoder[col].transform(df[col])
+
+    for col in encoder:
+        df[col] = encoder[col].transform(df[col])
 
     prediction = model.predict(df)
-    st.success(f"Predicted Salary : {prediction[0]:}")
+
+    st.success(f"Predicted Salary: {prediction[0]}")
